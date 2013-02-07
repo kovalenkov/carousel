@@ -2,7 +2,7 @@
  * RealyCarousel
  */
 
-(function($) {
+(function($, undefined) {
 
 	var Whell = (function() {
 
@@ -37,7 +37,7 @@
 					}
 
 				}
-				// Отменяет текущее событие - событие поумолчанию (скролинг окна).
+				// Отменяет текущее событие - событие по умолчанию (скролинг окна).
 				if (event.preventDefault)
 					event.preventDefault();
 				event.returnValue = false;
@@ -75,8 +75,6 @@
 
 	function Carousel(box, options) {
 
-
-
 		this.x = this.y = Math.floor(options.radius/2);
 		this.options = options;
 
@@ -111,14 +109,11 @@
 //
 
 		this.zero_first_pos = position(this.normalizeGrad(this.first - options.step), options.radius/2, this);
-		this.first_pos =position(this.first, options.radius/2, this);
-		this.last_pos  =position(this.last, options.radius/2, this);
-		this.zero_last_pos  =position(this.normalizeGrad(this.last + options.step), options.radius/2, this);
+		this.first_pos      = position(this.first, options.radius/2, this);
+		this.last_pos       = position(this.last, options.radius/2, this);
+		this.zero_last_pos  = position(this.normalizeGrad(this.last + options.step), options.radius/2, this);
 
 		var type = 0;
-
-
-		var int;
 
 		for ( var i = 0; i < elements.length; i++ ) {
 
@@ -137,13 +132,10 @@
 				el.hide();
 			} else if ( type === 4 ) {
 				pos = this.zero_last_pos;
-				console.log(pos)
 				el.hide();
 			} else {
 				type = 2;
 			}
-
-			console.log(pos.x, pos.y)
 
 			el.data('grad', grad);
 			el.data('type', type);
@@ -152,10 +144,6 @@
 				top: pos.x + 'px'
 			});
 		}
-
-		var step = Math.abs(options.step);
-		var statusEl = 0;
-		var int = 0;
 
 		options.next.on('click', function() {
 			_this.next();
@@ -413,4 +401,4 @@
 
 	};
 
-})(jQuery);
+})(jQuery, undefined);
